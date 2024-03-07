@@ -11,14 +11,14 @@ services:
       - mongoconfig:/data/configdb
     environment:
       - Entorno=inti_luna
-      - MONGO_INITDB_ROOT_USERNAME:admin
-      - MONGO_INITDB_ROOT_PASSWORD:adminpw
-      - MONGO_INITDB_DATABASE:admin
-    command: [--auth]
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpw
+      - MONGO_INITDB_DATABASE=test
+    command: mongod
 
 
-  netapi:
-    image: imagenet:1.0
+  netapiv1:
+    image: lunadocker0198/imagenet:1.0
     ports:
       - "7007:7007"
     volumes:
@@ -26,10 +26,26 @@ services:
       - mongoconfig:/data/configdb
     environment:
       - Entorno=inti_luna
-      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_DATABASE=test
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=adminpw
-      - CONFIG_MONGODB_URL = mongodb://admin:adminpw@mongo:27017/
+      - CONFIG_MONGODB_URL=mongodb://admin:adminpw@mongo:27017/
+    depends_on:
+    - mongo
+
+  netapiv2:
+    image: lunadocker0198/imagenet:2.0
+    ports:
+      - "7010:7010"
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    environment:
+      - Entorno=inti_luna
+      - MONGO_INITDB_DATABASE=test
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpw
+      - CONFIG_MONGODB_URL=mongodb://admin:adminpw@mongo:27017/
     depends_on:
     - mongo
 
