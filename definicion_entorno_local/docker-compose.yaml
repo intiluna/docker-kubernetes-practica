@@ -3,6 +3,7 @@ version: "3.8"
 services:
   mongo:
     image: lunadocker0198/mongodhackinti:1.0
+    #image: mongo:4.0.7-xenial
     restart: always
     ports:
       - "27017:27017"
@@ -21,6 +22,14 @@ services:
     image: lunadocker0198/imagenet:1.0
     ports:
       - "7007:7007"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '2'
+          memory: 512M
     volumes:
       - mongodata:/data/db
       - mongoconfig:/data/configdb
@@ -37,6 +46,14 @@ services:
     image: lunadocker0198/imagenet:2.0
     ports:
       - "7010:7010"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 512M
+        reservations:
+          cpus: '2'
+          memory: 512M
     volumes:
       - mongodata:/data/db
       - mongoconfig:/data/configdb
@@ -53,5 +70,3 @@ services:
 volumes:
   mongodata:
   mongoconfig:
-
-
