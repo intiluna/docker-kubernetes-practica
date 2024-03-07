@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: lunadocker0198/mongodhackinti:1.0
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    environment:
+      - Entorno=inti_luna
+      - MONGO_INITDB_ROOT_USERNAME:admin
+      - MONGO_INITDB_ROOT_PASSWORD:adminpw
+      - MONGO_INITDB_DATABASE:admin
+    command: [--auth]
+
+
+  netapi:
+    image: imagenet:1.0
+    ports:
+      - "7007:7007"
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    environment:
+      - Entorno=inti_luna
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpw
+      - CONFIG_MONGODB_URL = mongodb://admin:adminpw@mongo:27017/
+    depends_on:
+    - mongo
+
+
+volumes:
+  mongodata:
+  mongoconfig:
+
+
