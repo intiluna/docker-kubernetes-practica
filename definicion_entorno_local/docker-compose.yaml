@@ -7,6 +7,14 @@ services:
     restart: always
     ports:
       - "27017:27017"
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 5120M
+        reservations:
+          cpus: '4'
+          memory: 5120M
     volumes:
       - mongodata:/data/db
       - mongoconfig:/data/configdb
