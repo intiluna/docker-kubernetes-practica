@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  namespace: proyecto1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mongo
+  template:
+    metadata:
+      labels:
+        component: mongo
+    spec:
+      # volume configuration for the pod
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-persistent-volume-claim
+      containers:
+        - name: mongo
+          image: lunadocker0198/mongodhackinti:1.0
+          ports:
+            - containerPort: 27017
+          # volume mounting configuration for the container
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db
+          env:
+            - name: ENTORNO
+              value: inti_luna
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: adminpw
+            - name: MONGO_INITDB_DATABASE
+              value: test
