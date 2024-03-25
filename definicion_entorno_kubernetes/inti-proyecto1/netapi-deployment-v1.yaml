@@ -3,21 +3,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: netapi-deployment
+  name: netapi-deployment-v1
   namespace: proyecto1
 spec:
   replicas: 2
   selector:
     matchLabels:
-      component: netapi
+      component: netapi-v1
   template:
     metadata:
       name: proyecto1_Inti_Luna
       labels:
-        component: netapi
+        component: netapi-v1
     spec:
       containers:
-        - name: netapi
+        - name: netapi-v1
           image: lunadocker0198/imagenet:1.0
           ports:
             - containerPort: 7007
@@ -38,7 +38,7 @@ spec:
                   key: password
             - name: CONFIG_MONGODB_URL
               #value: "mongodb://mongo:27017"
-              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongo:27017/"
+              value: "mongodb://$(MONGO_INITDB_ROOT_USERNAME):$(MONGO_INITDB_ROOT_PASSWORD)@mongo-service:27017/"
 
           resources: {}
 
