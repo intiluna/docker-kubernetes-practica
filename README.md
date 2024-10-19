@@ -1,15 +1,45 @@
 # docker-kubernetes-practica
-Practica de docker y kubernetes
 
-Parte Docker
-Se han creado 3 imagenes: 2 para API .NET y 1 para mongodb.
+**Practice with Docker and Kubernetes**
 
-Criterios usados:
+This project demonstrates the use of **Docker** and **Kubernetes** to create, deploy, and manage a **.NET** application connected to a **MongoDB** database. It leverages container technology to solve compatibility issues across multiple platforms, optimize resource usage, and streamline deployment.
 
-- Definición y creación de imágenes.
-- Ejecución de comandos dentro de un contenedor
-- Persistencia de información de la base de datos.
-- Publicación de imágenes en un registro de contenedores.
-- Creación de nuevas versiones de una imagen.
+## Docker Section
+Three images were created: two for the **.NET API** and one for **MongoDB**.
 
-Pruebas  en : https://docs.google.com/document/d/1_exWR6R3zWzeC5EHMod3fcy7lWRHAQGxqoL8DDBqT8s/edit?usp=sharing
+### Key Criteria:
+- Definition and creation of Docker images.
+- Execution of commands inside a container.
+- Data persistence for the MongoDB database using volumes.
+- Publishing images to a container registry.
+- Creating new versions of an image.
+
+### Tests
+Testing details can be found in this document (in Spanish): [Docker and Kubernetes Tests](https://docs.google.com/document/d/1_exWR6R3zWzeC5EHMod3fcy7lWRHAQGxqoL8DDBqT8s/edit?usp=sharing)
+
+## Kubernetes Section
+The deployment was carried out using **Kubernetes**, with YAML files defining the **pods**, services, persistent volumes, and secrets.
+
+## How to Run:
+
+### Using Docker Compose:
+1. Build the Docker images:
+   ```bash
+   docker-compose build
+   ```
+2. Start the services:
+   ```bash
+   docker-compose up
+   ```
+
+### Using Kubernetes:
+1. Apply the Kubernetes manifests:
+   ```bash
+   kubectl apply -f k8s/
+   ```
+
+2. Verify that the pods, services, persistent volumes, and secrets are correctly configured.
+
+## Tags:
+**Docker**, **Docker Compose**, **Kubernetes**, **.NET**, **MongoDB**, **Volumes**, **Secrets**
+
